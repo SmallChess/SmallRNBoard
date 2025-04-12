@@ -2,7 +2,6 @@ import type { Move } from 'chess.js';
 import React, { useMemo } from 'react';
 import { Dimensions } from 'react-native';
 import type { PieceType } from '../../types';
-
 import type { ChessboardState } from '../../helpers/get-chessboard-state';
 
 type ChessMoveInfo = {
@@ -100,26 +99,25 @@ const ChessboardPropsContext = React.createContext<ChessboardContextType>(
   defaultChessboardProps
 );
 
-const ChessboardPropsContextProvider: React.FC<ChessboardProps> = React.memo(
-  ({ children, ...rest }) => {
-    const value = useMemo(() => {
-      const data = {
-        ...defaultChessboardProps,
-        ...rest,
-        colors: { ...defaultChessboardProps.colors, ...rest.colors },
-        durations: { ...defaultChessboardProps.durations, ...rest.durations },
-      };
-      return { ...data, pieceSize: data.boardSize / 8 };
-    }, [rest]);
+const ChessboardPropsContextProvider: React.FC<
+  ChessboardProps & { children: React.ReactNode }
+> = React.memo(({ children, ...rest }) => {
+  const value = useMemo(() => {
+    const data = {
+      ...defaultChessboardProps,
+      ...rest,
+      colors: { ...defaultChessboardProps.colors, ...rest.colors },
+      durations: { ...defaultChessboardProps.durations, ...rest.durations },
+    };
+    return { ...data, pieceSize: data.boardSize / 8 };
+  }, [rest]);
 
-    return (
-      <ChessboardPropsContext.Provider value={value}>
-        {children}
-      </ChessboardPropsContext.Provider>
-    );
-  }
-);
+  return (
+    <ChessboardPropsContext.Provider value={value}>
+      {children}
+    </ChessboardPropsContext.Provider>
+  );
+});
 
 export { ChessboardPropsContextProvider, ChessboardPropsContext };
-// eslint-disable-next-line no-undef
 export type { ChessboardProps };

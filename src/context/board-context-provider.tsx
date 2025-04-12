@@ -6,10 +6,13 @@ import { useConst } from '../hooks/use-const';
 import { BoardContext, BoardSetterContext } from './board-context';
 import {
   BoardOperationsContextProvider,
-  BoardOperationsRef,
+  type BoardOperationsRef,
 } from './board-operations-context';
 import { BoardPromotionContextProvider } from './board-promotion-context';
-import { BoardRefsContextProvider, ChessboardRef } from './board-refs-context';
+import {
+  BoardRefsContextProvider,
+  type ChessboardRef,
+} from './board-refs-context';
 import { ChessEngineContext } from './chess-engine-context';
 
 type BoardContextProviderProps = {

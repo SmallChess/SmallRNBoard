@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from 'react';
 import {
-  ChessboardState,
+  type ChessboardState,
   getChessboardState,
 } from '../../helpers/get-chessboard-state';
 import type { ChessPieceRef } from '../../components/piece';
