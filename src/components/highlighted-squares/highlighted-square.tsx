@@ -1,5 +1,5 @@
 import React, { useImperativeHandle } from 'react';
-import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { type StyleProp, StyleSheet, type ViewStyle } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,

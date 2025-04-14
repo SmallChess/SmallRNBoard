@@ -8,7 +8,7 @@ import { SuggestedDots } from './components/suggested-dots';
 import { ChessboardContextProvider } from './context/board-context-provider';
 import type { ChessboardRef } from './context/board-refs-context';
 import {
-  ChessboardProps,
+  type ChessboardProps,
   ChessboardPropsContextProvider,
 } from './context/props-context';
 import { useChessboardProps } from './context/props-context/hooks';
