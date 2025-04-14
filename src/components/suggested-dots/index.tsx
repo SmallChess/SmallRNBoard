@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { useBoardOperations } from '../../context/board-operations-context/hooks';
 import { useChessEngine } from '../../context/chess-engine-context/hooks';
+import { useChessboardProps } from '../../contexts/ChessboardContext';
 
 import { PlaceholderDot } from './PlaceholderDot';
 

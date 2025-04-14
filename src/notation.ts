@@ -5,7 +5,7 @@ import { useChessboardProps } from './context/props-context/hooks';
 import type { Vector } from './types';
 
 const useReversePiecePosition = () => {
-  const { pieceSize } = useChessboardProps();
+  const { pieceSize, flippedBoard } = useChessboardProps();
 
   const toTranslation = useCallback(
     (to: Square) => {
@@ -20,12 +20,17 @@ const useReversePiecePosition = () => {
         x: col.charCodeAt(0) - 'a'.charCodeAt(0),
         y: parseInt(row, 10) - 1,
       };
+      
+      // Flip coordinates if needed
+      const displayX = flippedBoard ? 7 - indexes.x : indexes.x;
+      const displayY = flippedBoard ? 7 - indexes.y : indexes.y;
+      
       return {
-        x: indexes.x * pieceSize,
-        y: 7 * pieceSize - indexes.y * pieceSize,
+        x: displayX * pieceSize,
+        y: 7 * pieceSize - displayY * pieceSize,
       };
     },
-    [pieceSize]
+    [pieceSize, flippedBoard]
   );
 
   const toPosition = useCallback(
@@ -33,9 +38,21 @@ const useReversePiecePosition = () => {
       'worklet';
       const col = String.fromCharCode(97 + Math.round(x / pieceSize));
       const row = `${8 - Math.round(y / pieceSize)}`;
-      return `${col}${row}` as Square;
+      const square = `${col}${row}` as Square;
+      
+      if (flippedBoard) {
+        // Flip the square notation
+        const tokens = square.split('');
+        const col = tokens[0];
+        const row = tokens[1];
+        const newCol = String.fromCharCode(97 + (7 - (col.charCodeAt(0) - 'a'.charCodeAt(0))));
+        const newRow = `${8 - (parseInt(row, 10) - 1)}`;
+        return `${newCol}${newRow}` as Square;
+      }
+      
+      return square;
     },
-    [pieceSize]
+    [pieceSize, flippedBoard]
   );
 
   return { toPosition, toTranslation };

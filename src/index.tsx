@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 });
 
 const Chessboard: React.FC = React.memo(() => {
-  const { boardSize } = useChessboardProps();
+  const { boardSize, flippedBoard } = useChessboardProps();
 
   return (
     <View style={[styles.container, { width: boardSize }]}>
