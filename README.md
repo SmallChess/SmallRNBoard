@@ -1,14 +1,17 @@
-<h1 align="center">
-👉🏼 React Native Chessboard
-</h1>
+## Summary
 
-A lightweight, simple, and high-performing chessboard for React Native. 
+React Native Chessboard
 
-Deeply inspired by the [Chess Youtube Episode](https://youtu.be/JulJJxbP_T0) from the series ["Can it be done in React Native?"](https://github.com/wcandillon/can-it-be-done-in-react-native) made by [William Candillon](https://github.com/wcandillon).
+## Usage
 
-<div align="center">
-    <img src="https://github.com/enzomanuelmangano/react-native-chessboard/blob/main/.assets/chessboard.gif" title="react-native-chessboard">
-</div>
+```
+yarn install
+cd example
+yarn install
+yarn start
+```
+
+## Original
 
 ## Disclaimer 
 
