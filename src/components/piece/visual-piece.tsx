@@ -9,12 +9,12 @@ type ChessPieceType = {
 } & Partial<ImageProps>;
 
 const ChessPiece: React.FC<ChessPieceType> = React.memo(({ id, ...rest }) => {
-  const { pieceSize, renderPiece } = useChessboardProps();
+  const { pieceSize, renderPiece, isFlipped } = useChessboardProps();
 
   return (
     renderPiece?.(id) ?? (
       <Image
-        style={[{ width: pieceSize, height: pieceSize }, rest.style]}
+        style={[{ width: pieceSize, height: pieceSize, transform: [{rotate: isFlipped ? '180deg' : '0deg'}] }, rest.style]}
         {...rest}
         source={PIECES[id]}
       />

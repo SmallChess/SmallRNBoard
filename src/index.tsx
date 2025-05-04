@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
 });
 
 const Chessboard: React.FC = React.memo(() => {
-  const { boardSize } = useChessboardProps();
+  const { boardSize, isFlipped } = useChessboardProps();
 
   return (
-    <View style={[styles.container, { width: boardSize }]}>
+    <View style={[styles.container, { width: boardSize, transform: [{rotate: isFlipped ? '180deg' : '0deg'}] }]}>
       <Background />
       <Pieces />
       <HighlightedSquares />

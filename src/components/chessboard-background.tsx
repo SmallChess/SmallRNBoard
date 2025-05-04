@@ -29,11 +29,11 @@ interface SquareProps extends RowProps {
 
 const Square = React.memo(
   ({ white, row, col, letters, numbers }: SquareProps) => {
-    const { colors } = useChessboardProps();
+    const { colors, isFlipped } = useChessboardProps();
     const backgroundColor = white ? colors.black : colors.white;
     const color = white ? colors.white : colors.black;
     const textStyle = { fontWeight: '500' as const, fontSize: 10, color };
-    const newLocal = col === 0;
+    const newLocal = isFlipped ? col == 7 : col === 0;
     return (
       <View
         style={{
@@ -43,12 +43,25 @@ const Square = React.memo(
           justifyContent: 'space-between',
         }}
       >
-        {numbers && (
+
+        {isFlipped && row === 0 && letters && (
+          <Text style={[textStyle, { alignSelf: 'flex-end', transform: [{ rotate: '180deg' }] }]}>
+            {String.fromCharCode(97 + col)}
+          </Text>
+        )}
+        {isFlipped && <View />}
+        {isFlipped && numbers && (
+          <Text style={[textStyle, { alignSelf: 'flex-end', opacity: newLocal ? 1 : 0, transform: [{ rotate: '180deg' }] }]}>
+            {'' + (8 - row)}
+          </Text>
+        )}
+
+        {!isFlipped && numbers && (
           <Text style={[textStyle, { opacity: newLocal ? 1 : 0 }]}>
             {'' + (8 - row)}
           </Text>
         )}
-        {row === 7 && letters && (
+        {!isFlipped && row === 7 && letters && (
           <Text style={[textStyle, { alignSelf: 'flex-end' }]}>
             {String.fromCharCode(97 + col)}
           </Text>
