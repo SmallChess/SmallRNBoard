@@ -20,6 +20,11 @@ export default function App() {
     })();
   }, []);
 
+  const handleFlip = ()=>{
+    // ref.current?.flip();
+    setFlipped(p => !p)
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -33,7 +38,7 @@ export default function App() {
         isFlipped={flipped}
       />
 
-      <TouchableOpacity onPress={() => setFlipped(p => !p)} style={styles.flipButton} >
+      <TouchableOpacity onPress={handleFlip} style={styles.flipButton} >
         <Text style={styles.flipText} >{flipped ? "Black's Turn" : "White's Turn"}</Text>
       </TouchableOpacity>
     </View>
