@@ -35,6 +35,7 @@ export type ChessboardRef = {
   resetAllHighlightedSquares: () => void;
   resetBoard: (fen?: string) => void;
   getState: () => ChessboardState;
+  flip?: () => void;
 };
 
 const BoardRefsContextProviderComponent = React.forwardRef<
