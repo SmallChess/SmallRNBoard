@@ -1,12 +1,11 @@
 import Chessboard, { ChessboardRef } from 'react-native-chessboard';
-import { StyleSheet, Animated, StatusBar as RNStatusBar, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, Animated, StatusBar as RNStatusBar } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import View = Animated.View;
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function App() {
   const ref = useRef<ChessboardRef>(null);
-  const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -25,21 +24,12 @@ export default function App() {
       <StatusBar style="auto" />
       <Chessboard
         ref={ref}
-        flippedBoard={true}
         onMove={({ state }) => {
           if (state.in_checkmate) {
             console.log('Life goes on.');
           }
         }}
       />
-      <TouchableOpacity 
-        style={styles.flipButton}
-        onPress={() => setIsFlipped(!isFlipped)}
-      >
-        <Text style={styles.flipButtonText}>
-          {isFlipped ? 'Show White\'s View' : 'Show Black\'s View'}
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -51,15 +41,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: '55%',
-  },
-  flipButton: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: '#62B1A8',
-    borderRadius: 5,
-  },
-  flipButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
   },
 });

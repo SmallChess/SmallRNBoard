@@ -20,14 +20,10 @@ type PlaceholderDotProps = {
 
 const PlaceholderDot: React.FC<PlaceholderDotProps> = React.memo(
   ({ x, y, selectableSquares, moveTo }) => {
-    const { pieceSize, flippedBoard } = useChessboardProps();
+    const { pieceSize } = useChessboardProps();
     const { toPosition, toTranslation } = useReversePiecePosition();
 
-    // Calculate flipped coordinates
-    const displayX = flippedBoard ? 7 - x : x;
-    const displayY = flippedBoard ? 7 - y : y;
-
-    const currentSquare = toPosition({ x: displayX * pieceSize, y: displayY * pieceSize });
+    const currentSquare = toPosition({ x: x * pieceSize, y: y * pieceSize });
     const translation = useMemo(
       () => toTranslation(currentSquare),
       [currentSquare, toTranslation]

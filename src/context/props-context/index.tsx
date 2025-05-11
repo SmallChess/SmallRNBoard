@@ -39,10 +39,6 @@ type ChessboardProps = {
    */
   withNumbers?: boolean;
   /**
-   * Shows the board from black's perspective (flips coordinates, a1 becomes h8)
-   */
-  flippedBoard?: boolean;
-  /**
    * Indicates the chessboard width and height.
    */
   boardSize?: number;
@@ -95,7 +91,6 @@ const defaultChessboardProps: ChessboardContextType = {
   },
   withLetters: true,
   withNumbers: true,
-  flippedBoard: false,
   boardSize: DEFAULT_BOARD_SIZE,
   pieceSize: DEFAULT_BOARD_SIZE / 8,
 };

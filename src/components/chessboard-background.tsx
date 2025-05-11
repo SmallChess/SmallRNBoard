@@ -29,16 +29,11 @@ interface SquareProps extends RowProps {
 
 const Square = React.memo(
   ({ white, row, col, letters, numbers }: SquareProps) => {
-    const { colors, flippedBoard } = useChessboardProps();
+    const { colors } = useChessboardProps();
     const backgroundColor = white ? colors.black : colors.white;
     const color = white ? colors.white : colors.black;
     const textStyle = { fontWeight: '500' as const, fontSize: 10, color };
     const newLocal = col === 0;
-    
-    // Calculate flipped coordinates
-    const displayRow = flippedBoard ? 7 - row : row;
-    const displayCol = flippedBoard ? 7 - col : col;
-    
     return (
       <View
         style={{
@@ -50,12 +45,12 @@ const Square = React.memo(
       >
         {numbers && (
           <Text style={[textStyle, { opacity: newLocal ? 1 : 0 }]}>
-            {'' + (8 - displayRow)}
+            {'' + (8 - row)}
           </Text>
         )}
         {row === 7 && letters && (
           <Text style={[textStyle, { alignSelf: 'flex-end' }]}>
-            {String.fromCharCode(97 + displayCol)}
+            {String.fromCharCode(97 + col)}
           </Text>
         )}
       </View>
