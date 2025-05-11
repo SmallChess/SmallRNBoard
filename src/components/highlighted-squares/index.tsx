@@ -11,7 +11,7 @@ import { useSquareRefs } from '../../context/board-refs-context/hooks';
 const HighlightedSquares: React.FC = React.memo(() => {
   const chess = useChessEngine();
   const board = useMemo(() => chess.board(), [chess]);
-  const { pieceSize, flippedBoard } = useChessboardProps();
+  const { pieceSize } = useChessboardProps();
   const { toPosition, toTranslation } = useReversePiecePosition();
   const refs = useSquareRefs();
 
@@ -23,11 +23,7 @@ const HighlightedSquares: React.FC = React.memo(() => {
     >
       {board.map((row, y) =>
         row.map((_, x) => {
-          // Calculate flipped coordinates
-          const displayX = flippedBoard ? 7 - x : x;
-          const displayY = flippedBoard ? 7 - y : y;
-          
-          const square = toPosition({ x: displayX * pieceSize, y: displayY * pieceSize });
+          const square = toPosition({ x: x * pieceSize, y: y * pieceSize });
           const translation = toTranslation(square);
 
           return (
