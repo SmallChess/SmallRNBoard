@@ -1,7 +1,7 @@
 {
   "name": "react-native-chessboard",
-  "version": "0.1.2",
-  "description": "A lightweight, simple, and high-performing chessboard for React Native",
+  "version": "0.2.0",
+  "description": "SmallChess adoption of the open source React Native chess board",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
