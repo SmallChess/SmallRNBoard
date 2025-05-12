@@ -241,11 +241,3 @@ Resets the chessboard from a fen position.
 Returns the current state of the chessboard (which can also be retrieved using the onMove callback).
 
 ---
-
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## License
-
-MIT
