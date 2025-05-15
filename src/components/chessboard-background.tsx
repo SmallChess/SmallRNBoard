@@ -29,11 +29,14 @@ interface SquareProps extends RowProps {
 
 const Square = React.memo(
   ({ white, row, col, letters, numbers }: SquareProps) => {
-    const { colors } = useChessboardProps();
+    const { colors, isFlipped } = useChessboardProps();
     const backgroundColor = white ? colors.black : colors.white;
     const color = white ? colors.white : colors.black;
     const textStyle = { fontWeight: '500' as const, fontSize: 10, color };
-    const newLocal = col === 0;
+    const newLocal = isFlipped ? col == 7 : col === 0;
+    const numberStyle = isFlipped ? [textStyle, style.flexEnd, style.rotate180, { opacity: newLocal ? 1 : 0 }] : [textStyle, { opacity: newLocal ? 1 : 0 }]
+    const letterStyle = isFlipped ? [textStyle, style.flexStart, style.rotate180] : [textStyle, style.flexEnd]
+    
     return (
       <View
         style={{
@@ -41,15 +44,16 @@ const Square = React.memo(
           backgroundColor,
           padding: 4,
           justifyContent: 'space-between',
+          flexDirection: isFlipped ? 'column-reverse' : 'column'
         }}
       >
         {numbers && (
-          <Text style={[textStyle, { opacity: newLocal ? 1 : 0 }]}>
+          <Text style={numberStyle}>
             {'' + (8 - row)}
           </Text>
         )}
-        {row === 7 && letters && (
-          <Text style={[textStyle, { alignSelf: 'flex-end' }]}>
+        {(row === 7 || row === 0) && letters && (
+          <Text style={letterStyle}>
             {String.fromCharCode(97 + col)}
           </Text>
         )}
@@ -93,3 +97,9 @@ const Background: React.FC = React.memo(() => {
 });
 
 export default Background;
+
+const style = StyleSheet.create({
+  flexEnd: { alignSelf: 'flex-end' },
+  flexStart: { alignSelf: 'flex-start' },
+  rotate180: { transform: [{ rotate: '180deg' }] }
+})

@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useRef } from 'react';
+import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import Background from './components/chessboard-background';
@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
 });
 
 const Chessboard: React.FC = React.memo(() => {
-  const { boardSize } = useChessboardProps();
+  const { boardSize, isFlipped } = useChessboardProps();
 
   return (
-    <View style={[styles.container, { width: boardSize }]}>
+    <View style={[styles.container, { width: boardSize, transform: [{rotate: isFlipped ? '180deg' : '0deg'}] }]}>
       <Background />
       <Pieces />
       <HighlightedSquares />
@@ -39,6 +39,11 @@ const ChessboardContainerComponent = React.forwardRef<
   ChessboardProps
 >((props, ref) => {
   const chessboardRef = useRef<ChessboardRef>(null);
+  const [isFlipped, setIsFlipped] = useState(props.isFlipped || false);
+
+  useEffect(()=>{
+    setIsFlipped(props.isFlipped || false);
+  },[props.isFlipped])
 
   useImperativeHandle(
     ref,
@@ -50,13 +55,14 @@ const ChessboardContainerComponent = React.forwardRef<
         chessboardRef.current?.resetAllHighlightedSquares(),
       getState: () => chessboardRef?.current?.getState() as ChessboardState,
       resetBoard: (params) => chessboardRef.current?.resetBoard(params),
+      flip: () => setIsFlipped((prevState) => !prevState)
     }),
-    []
+    [setIsFlipped]
   );
 
   return (
     <GestureHandlerRootView>
-      <ChessboardPropsContextProvider {...props}>
+      <ChessboardPropsContextProvider {...props} isFlipped={isFlipped}>
         <ChessboardContextProvider ref={chessboardRef} fen={props.fen}>
           <Chessboard />
         </ChessboardContextProvider>
