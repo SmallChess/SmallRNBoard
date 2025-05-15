@@ -26,7 +26,7 @@ export default function App() {
                 isFlipped={flipped}
              />
             <TouchableOpacity onPress={handleFlip} style={styles.flipButton} >
-                <Text style={styles.flipText} >{flipped ? "Black's Turn" : "White's Turn"}</Text>
+                <Text style={styles.flipText} >Flip</Text>
             </TouchableOpacity>
         </View>
     );
